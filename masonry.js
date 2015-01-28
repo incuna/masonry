@@ -90,6 +90,11 @@ function masonryDefinition( Outlayer, getSize ) {
     var minimumY = Math.min.apply( Math, colGroup );
     var shortColIndex = indexOf( colGroup, minimumY );
 
+    if (!this.options.optimiseVerticalSpace) {
+        shortColIndex = indexOf(this.items, item) % this.cols;
+        minimumY = this.colYs[shortColIndex];
+    }
+
     // position the brick
     var position = {
       x: this.columnWidth * shortColIndex,

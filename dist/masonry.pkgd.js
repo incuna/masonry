@@ -147,7 +147,7 @@ if ( typeof define === 'function' && define.amd ) {
 })( window );
 
 /*!
- * eventie v1.0.5
+ * eventie v1.0.6
  * event binding helper
  *   eventie.bind( elem, 'click', myFn )
  *   eventie.unbind( elem, 'click', myFn )
@@ -227,7 +227,7 @@ if ( typeof define === 'function' && define.amd ) {
   window.eventie = eventie;
 }
 
-})( this );
+})( window );
 
 /*!
  * docReady v1.0.4
@@ -2837,6 +2837,11 @@ function masonryDefinition( Outlayer, getSize ) {
     // get the minimum Y value from the columns
     var minimumY = Math.min.apply( Math, colGroup );
     var shortColIndex = indexOf( colGroup, minimumY );
+
+    if (!this.options.optimiseVerticalSpace) {
+        shortColIndex = indexOf(this.items, item) % this.cols;
+        minimumY = this.colYs[shortColIndex];
+    }
 
     // position the brick
     var position = {
